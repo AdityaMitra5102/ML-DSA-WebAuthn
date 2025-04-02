@@ -3,7 +3,7 @@ title: "ML-DSA for Web Authentication"
 abbrev: "ml-dsa-webauthn"
 category: std
 
-docname: draft-vitap-ml-dsa-webauthn-01
+docname: draft-vitap-ml-dsa-webauthn-00
 submissiontype: IETF
 number:
 date:
