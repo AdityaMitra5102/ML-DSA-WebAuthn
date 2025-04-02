@@ -2,7 +2,7 @@
 
 
 
-Independent Author                                              A. Mitra
+Network Working Group                                           A. Mitra
 Internet-Draft                                      S. S. Chakkaravarthy
 Intended status: Standards Track                                A. Ghosh
 Expires: 4 October 2025                                         D. P. VS
@@ -19,6 +19,13 @@ Abstract
    in Web Authentication (WebAuthn) using Module-Lattice-Based Digital
    Signature Standard (ML-DSA), a Post-Quantum Cryptography (PQC)
    digital signature scheme defined in FIPS 204.
+
+Discussion Venues
+
+   This note is to be removed before publishing as an RFC.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/AdityaMitra5102/ML-DSA-WebAuthn.
 
 Status of This Memo
 
