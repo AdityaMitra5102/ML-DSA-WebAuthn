@@ -9,8 +9,8 @@ number:
 date:
 consensus: true
 v: 3
-area: "Security"
-workgroup: "Independent Author"
+# area: "Security"
+# workgroup: "Independent Author"
 keyword:
  - PQC
  - COSE
