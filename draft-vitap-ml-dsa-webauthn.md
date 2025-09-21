@@ -107,7 +107,7 @@ This section describes the implementation of WebAuthn with ML-DSA.
 
 ML-DSA Signature Scheme is parameterized to support different security levels. In this document, the abbreviations of ML-DSA-44, ML-DSA-65 and ML-DSA-87 are used to refer to ML-DSA with the parameter choices given in Table 1 of FIPS-204.
 
-Along with {{-ML-DSA-COSE}}, this document requests the registration of the following algorithms in {{-IANA.cose}}:
+This document requests the registration of the ML-DSA algorithms in {{-IANA.cose}} as mentioned in {{-ML-DSA-COSE}} as :
 
 | Name       | value                              |                 Description
 |---
@@ -250,8 +250,6 @@ h'A50158201637B26333915747DBDC6C630C0165405A64939AE8F6E4FC39414F853F702F1602A262
 
 The authenticator MUST verify whether any credential mentioned in the list of "excludeCredentials" in the public key credential creation object is already present on the authenticator, and in such cases it will return the error code in accordance with {{CTAP}}. Further authenticator MUST perform all additional checks involving authenticator PIN, User presence, user verification etc in accordance with Section 5.1 of CTAP.
 
-The authenticator SHALL use ML-DSA-65 or ML-DSA-44 if included in `alg` -49 or -48 respectively are available in the public key credential parameters. If the parameters are not present, the authenticator SHALL behave in accordance with the "Backward Compatibility Considerations" section of this document.
-
 The authenticator generates ML-DSA keypair in accordance with Section 5.1 of FIPS 204 and unique Key ID. The public key is COSE encoded following {{-ML-DSA-COSE}} and is a part of the attestedCredentialData.
 
 After passing all checks in accordance with section 5.1 of CTAP, the authenticator SHOULD create the attestation statement. The authData is created in accordance with WebAuthn and CTAP specifications and the clientDataHash is appended to it. This is signed with the private key of the generated keypair. The attestation statement is generated in accordance with CTAP and WebAuthn.
@@ -369,7 +367,7 @@ The authenticator `getNextAssertion()` function specification is to be similarly
 
 ## Backward Compatibility Consideration
 
-The authenticator SHOULD default to using RS256 and ES256 algorithms following FIPS-186-5 if the Relying Party (RP) does not support ML-DSA, which can be verified by inpecting the Public Key Credential Parameters field during credential creation.
+The authenticator SHOULD choose the algorithm to be used in accordance with CTAP, and hence not choose ML-DSA if not supported by the RP.
 
 # Client and Platform Considerations
 
@@ -420,65 +418,7 @@ If the amount of space in the secure storage permits, each ML-DSA Private key is
 
 ## Additions to Existing Registries
 
-Along with {{-ML-DSA-COSE}}, this document requests the registration of the following entries to the COSE Algorithm Registry.
-The following completed registration templates are provided as described in RFC9053 and RFC9054.
-
-### Algorithms to be added
-
-#### ML-DSA-44
-
-* Name: ML-DSA-44
-* Value: TBD (requested assignment -48)
-* Description: CBOR Object Signing Algorithm for ML-DSA-44
-* Capabilities: `[kty]`
-* Reference: RFC XXXX
-* Recommended: Yes
-
-#### ML-DSA-65
-
-* Name: ML-DSA-65
-* Value: TBD (requested assignment -49)
-* Description: CBOR Object Signing Algorithm for ML-DSA-65
-* Capabilities: `[kty]`
-* Reference: RFC XXXX
-* Recommended: Yes
-
-
-#### ML-DSA-87
-
-* Name: ML-DSA-87
-* Value: TBD (requested assignment -50)
-* Description: CBOR Object Signing Algorithm for ML-DSA-87
-* Capabilities: `[kty]`
-* Reference: RFC XXXX
-* Recommended: Yes
-
-### New COSE Key Types
-
-IANA is requested to add the following entries to the COSE Key Types Registry.
-The following completed registration templates are provided as described in RFC9053.
-
-#### AKP
-
-* Name: AKP
-* Value: TBD (requested assignment 7)
-* Description: COSE Key Type for Algorithm Key Pairs
-* Capabilities: `[kty(7)]`
-* Reference: RFC XXXX
-
-### New COSE Key Type Parameters
-
-IANA is requested to add the following entries to the COSE Key Type Parameters.
-The following completed registration templates are provided as described in RFC9053.
-
-#### ML-DSA Public Key
-
-* Key Type: TBD (requested assignment 7)
-* Name: pub
-* Label: -1
-* CBOR Type: bstr
-* Description: Public key
-* Reference: RFC XXXX
+This document requests the registration of the ML-DSA entries to the COSE Algorithm Registry as mentioned in {{-ML-DSA-COSE}}.
 
 --- back
 
