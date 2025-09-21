@@ -5,9 +5,9 @@
 Network Working Group                                           A. Mitra
 Internet-Draft                                      S. S. Chakkaravarthy
 Intended status: Standards Track                                A. Ghosh
-Expires: 4 October 2025                                         D. P. VS
+Expires: 25 March 2026                                          D. P. VS
                                                        VIT-AP University
-                                                            2 April 2025
+                                                       21 September 2025
 
 
                      ML-DSA for Web Authentication
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 October 2025.
+   This Internet-Draft will expire on 25 March 2026.
 
 Copyright Notice
 
@@ -81,9 +81,6 @@ Table of Contents
      7.3.  Implementation Best Practices
    8.  IANA Considerations
      8.1.  Additions to Existing Registries
-       8.1.1.  Algorithms to be added
-       8.1.2.  New COSE Key Types
-       8.1.3.  New COSE Key Type Parameters
    9.  References
      9.1.  Normative References
      9.2.  Informative References
@@ -148,8 +145,8 @@ Table of Contents
    ML-DSA-65 and ML-DSA-87 are used to refer to ML-DSA with the
    parameter choices given in Table 1 of FIPS-204.
 
-   Along with [I-D.draft-ietf-cose-dilithium-05], this document requests
-   the registration of the following algorithms in [IANA.cose]:
+   This document requests the registration of the ML-DSA algorithms in
+   [IANA.cose] as mentioned in [I-D.draft-ietf-cose-dilithium-05] as :
 
    +===========+=================+=========================+
    | Name      | value           | Description             |
@@ -330,12 +327,6 @@ h'A50158201637B26333915747DBDC6C630C0165405A64939AE8F6E4FC39414F853F702F1602A262
    authenticator PIN, User presence, user verification etc in accordance
    with Section 5.1 of CTAP.
 
-   The authenticator SHALL use ML-DSA-65 or ML-DSA-44 if included in alg
-   -49 or -48 respectively are available in the public key credential
-   parameters.  If the parameters are not present, the authenticator
-   SHALL behave in accordance with the "Backward Compatibility
-   Considerations" section of this document.
-
    The authenticator generates ML-DSA keypair in accordance with
    Section 5.1 of FIPS 204 and unique Key ID.  The public key is COSE
    encoded following [I-D.draft-ietf-cose-dilithium-05] and is a part of
@@ -484,10 +475,9 @@ h'A50158201637B26333915747DBDC6C630C0165405A64939AE8F6E4FC39414F853F702F1602A262
 
 5.3.  Backward Compatibility Consideration
 
-   The authenticator SHOULD default to using RS256 and ES256 algorithms
-   following FIPS-186-5 if the Relying Party (RP) does not support ML-
-   DSA, which can be verified by inpecting the Public Key Credential
-   Parameters field during credential creation.
+   The authenticator SHOULD choose the algorithm to be used in
+   accordance with CTAP, and hence not choose ML-DSA if not supported by
+   the RP.
 
 6.  Client and Platform Considerations
 
@@ -575,92 +565,9 @@ h'A50158201637B26333915747DBDC6C630C0165405A64939AE8F6E4FC39414F853F702F1602A262
 
 8.1.  Additions to Existing Registries
 
-   Along with [I-D.draft-ietf-cose-dilithium-05], this document requests
-   the registration of the following entries to the COSE Algorithm
-   Registry.  The following completed registration templates are
-   provided as described in RFC9053 and RFC9054.
-
-8.1.1.  Algorithms to be added
-
-8.1.1.1.  ML-DSA-44
-
-   *  Name: ML-DSA-44
-
-   *  Value: TBD (requested assignment -48)
-
-   *  Description: CBOR Object Signing Algorithm for ML-DSA-44
-
-   *  Capabilities: [kty]
-
-   *  Reference: RFC XXXX
-
-   *  Recommended: Yes
-
-8.1.1.2.  ML-DSA-65
-
-   *  Name: ML-DSA-65
-
-   *  Value: TBD (requested assignment -49)
-
-   *  Description: CBOR Object Signing Algorithm for ML-DSA-65
-
-   *  Capabilities: [kty]
-
-   *  Reference: RFC XXXX
-
-   *  Recommended: Yes
-
-8.1.1.3.  ML-DSA-87
-
-   *  Name: ML-DSA-87
-
-   *  Value: TBD (requested assignment -50)
-
-   *  Description: CBOR Object Signing Algorithm for ML-DSA-87
-
-   *  Capabilities: [kty]
-
-   *  Reference: RFC XXXX
-
-   *  Recommended: Yes
-
-8.1.2.  New COSE Key Types
-
-   IANA is requested to add the following entries to the COSE Key Types
-   Registry.  The following completed registration templates are
-   provided as described in RFC9053.
-
-8.1.2.1.  AKP
-
-   *  Name: AKP
-
-   *  Value: TBD (requested assignment 7)
-
-   *  Description: COSE Key Type for Algorithm Key Pairs
-
-   *  Capabilities: [kty(7)]
-
-   *  Reference: RFC XXXX
-
-8.1.3.  New COSE Key Type Parameters
-
-   IANA is requested to add the following entries to the COSE Key Type
-   Parameters.  The following completed registration templates are
-   provided as described in RFC9053.
-
-8.1.3.1.  ML-DSA Public Key
-
-   *  Key Type: TBD (requested assignment 7)
-
-   *  Name: pub
-
-   *  Label: -1
-
-   *  CBOR Type: bstr
-
-   *  Description: Public key
-
-   *  Reference: RFC XXXX
+   This document requests the registration of the ML-DSA entries to the
+   COSE Algorithm Registry as mentioned in
+   [I-D.draft-ietf-cose-dilithium-05].
 
 9.  References
 
@@ -719,12 +626,12 @@ h'A50158201637B26333915747DBDC6C630C0165405A64939AE8F6E4FC39414F853F702F1602A262
 
    [I-D.draft-ietf-lamps-dilithium-certificates]
               Massimo, J., Kampanakis, P., Turner, S., and B.
-              Westerbaan, "Internet X.509 Public Key Infrastructure:
-              Algorithm Identifiers for ML-DSA", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-dilithium-certificates-
-              07, 2 February 2025,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
-              dilithium-certificates-07>.
+              Westerbaan, "Internet X.509 Public Key Infrastructure -
+              Algorithm Identifiers for the Module-Lattice-Based Digital
+              Signature Algorithm (ML-DSA)", Work in Progress, Internet-
+              Draft, draft-ietf-lamps-dilithium-certificates-12, 26 June
+              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              lamps-dilithium-certificates-12>.
 
    [SP-500-57]
               "Audit and Evaluation of Computer Security II: System
