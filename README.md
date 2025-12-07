@@ -1,3 +1,6 @@
+## This draft would be discontinued following https://lists.w3.org/Archives/Public/public-webauthn/2025Apr/0015.html
+
+
 <!-- regenerate: on (set to off if you edit this file) -->
 
 # ML-DSA for Web Authentication
