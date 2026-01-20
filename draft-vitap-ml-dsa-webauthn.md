@@ -1,5 +1,5 @@
 ---
-title: "ML-DSA for Web Authenticationa"
+title: "ML-DSA for Web Authentication"
 abbrev: "ml-dsa-webauthn"
 category: std
 
