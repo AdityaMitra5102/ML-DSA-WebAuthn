@@ -5,12 +5,12 @@
 Network Working Group                                           A. Mitra
 Internet-Draft                                      S. S. Chakkaravarthy
 Intended status: Standards Track                                A. Ghosh
-Expires: 25 March 2026                                          D. P. VS
+Expires: 24 July 2026                                           D. P. VS
                                                        VIT-AP University
-                                                       21 September 2025
+                                                         20 January 2026
 
 
-                     ML-DSA for Web Authentication
+                     ML-DSA for Web Authenticationa
                    draft-vitap-ml-dsa-webauthn-latest
 
 Abstract
@@ -42,11 +42,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 March 2026.
+   This Internet-Draft will expire on 24 July 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -629,9 +629,9 @@ h'A50158201637B26333915747DBDC6C630C0165405A64939AE8F6E4FC39414F853F702F1602A262
               Westerbaan, "Internet X.509 Public Key Infrastructure -
               Algorithm Identifiers for the Module-Lattice-Based Digital
               Signature Algorithm (ML-DSA)", Work in Progress, Internet-
-              Draft, draft-ietf-lamps-dilithium-certificates-12, 26 June
-              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              lamps-dilithium-certificates-12>.
+              Draft, draft-ietf-lamps-dilithium-certificates-13, 30
+              September 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-lamps-dilithium-certificates-13>.
 
    [SP-500-57]
               "Audit and Evaluation of Computer Security II: System
