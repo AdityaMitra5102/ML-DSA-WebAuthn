@@ -10,7 +10,7 @@ Expires: 24 July 2026                                           D. P. VS
                                                          20 January 2026
 
 
-                     ML-DSA for Web Authenticationa
+                     ML-DSA for Web Authentication
                    draft-vitap-ml-dsa-webauthn-latest
 
 Abstract
