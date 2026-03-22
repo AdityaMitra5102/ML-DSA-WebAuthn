@@ -3,7 +3,7 @@ title: "ML-DSA for Web Authentication"
 abbrev: "ml-dsa-webauthn"
 category: std
 
-docname: draft-vitap-ml-dsa-webauthn-latest
+docname: draft-vitap-ml-dsa-webauthn-03
 submissiontype: IETF
 number:
 date:
@@ -384,6 +384,42 @@ It is considered that the chosen transport methods including but not limited to 
 ## Error Handling and Fallback mechanisms
 
 In case of errors involving ML-DSA key generation and signing, the authenticator may fallback to using ES256 or RS256 algoritms. In case of errors involving communication with the client, the authenticator may handle it in accordance with {{CTAP}}.
+
+# Attestation Considerations
+
+Using Post Quantum Crptography for creating attestation certificates for credentials implies the presence of additional ML-DSA signatures and public keys in the x.509 certificate, depending upon the attestation format, defined in the {{WebAuthn}} flow. A second ML-DSA-44 Signature size is around 2420 bytes and a public key is around 1312 bytes, and bigger for others. On the other hand, {{CTAP}} using a 7-bit sequence continuation packet numbers for CTAP-HID constrains it to have a maximum of 129 frames only. CTAP-HID frame can be of size 64 bytes at max. A makeCredential response with a valid attestation certificate would contain atleast `1312+2420+1312+2420=7464` bytes. 
+
+The first frame has 7 bytes of header (4 byte channel identifier, 1 byte CMD, 2 bytes BCNT), while continuation frames have 5 bytes of header (4 bytes of channel identifier, 1 byte of sequence number).
+
+Further, the first frame will have one byte of status code. The makeCredential response will contain the authData. This further contains 32 bytes of RP ID Hash, 1 byte of flags, 4 bytes of sign count and variable length attestedCredential data. The attestedCredential data further contains 16 bytes of AAGUID, 2 bytes of credential ID length. The credential ID is to be atleast 16 bytes, followed by the public key.
+
+This covers a total of 8182 bytes, leaving only 74 bytes for CBOR encoding, and the full x.509 certificate, including fields like the version, subjects, certificate chain and so on. Further, when other algorithms like ML-DSA-65 or higher is used, the available bytes in CTAP-HID would not suffice for the attestation certificate.
+
+## WebAuthn Considerations
+
+Due to the attestation certificate size limitations, Web Authentication standard is requested to recognize an attestation format 'minimal'. 
+
+The syntax of Minimal Attestation is defined by:
+~~~
+$$attStmtType //= (
+                      fmt: "minimal",
+                      attStmt: minimalStmtFormat,
+                  )
+
+minimalStmtFormat = {
+                       alg: COSEAlgorithmIdentifier,
+                       keyid: bytes,
+                       sig: bytes, 
+                   }
+~~~
+
+`sig` here is a signature over the authenticatorData and clientDataHash. The authenticator produces the sig by concatenating authenticatorData and clientDataHash, and signing the result using an attestation private key selected through an authenticator-specific mechanism. 
+
+`keyid` is an Identifier that identifies the key used to sign. It is a 16-byte unique identifier.
+
+### Verification and FIDO MDS Database Considerations
+
+The FIDO MDS database is requested to maintain the set of Public Key/ Verifying key certificates, identifiable by the AAGUID and the KeyId together. The RP may verify the attestation signature with the public key identified by the AAGUID and KeyID from the FIDO MDS database. Enterprise based implementations or implementations requiring self-attestation without FIDO MDS database MAY maintain their on keystores instead of the FIDO MDS database.
 
 # Security Considerations
 
