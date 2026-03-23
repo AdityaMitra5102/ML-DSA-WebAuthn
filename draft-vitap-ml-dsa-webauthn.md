@@ -3,7 +3,7 @@ title: "ML-DSA for Web Authentication"
 abbrev: "ml-dsa-webauthn"
 category: std
 
-docname: draft-vitap-ml-dsa-webauthn-03
+docname: draft-vitap-ml-dsa-webauthn-04
 submissiontype: IETF
 number:
 date:
@@ -400,6 +400,7 @@ This covers a total of 8182 bytes, leaving only 74 bytes for CBOR encoding, and 
 Due to the attestation certificate size limitations, Web Authentication standard is requested to recognize an attestation format 'minimal'. 
 
 The syntax of Minimal Attestation is defined by:
+
 ~~~
 $$attStmtType //= (
                       fmt: "minimal",
